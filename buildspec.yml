@@ -2,10 +2,8 @@ version: 0.2
  
 phases:
   install:
-    runtime-version:
-      python: 3.7
-      command:
-      - pip3 install
+    runtime-versions:
+      python: 3.7.16
              
   pre_build:
     commands:
