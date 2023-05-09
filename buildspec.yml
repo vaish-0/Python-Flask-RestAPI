@@ -10,6 +10,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - echo installing python dependenciess..
       - /root/.pyenv/versions/3.9.16/bin/python3.9 -m pip install --upgrade pip
+      - pip install app.py
       - aws --version
       - aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 496746411336.dkr.ecr.eu-north-1.amazonaws.com
       - REPOSITORY_URI=496746411336.dkr.ecr.eu-north-1.amazonaws.com/py-app
