@@ -6,7 +6,7 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - echo installing python dependenciess..
-      - pip install
+      - pip install --upgrade pip
       - aws --version
       - aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 496746411336.dkr.ecr.eu-north-1.amazonaws.com
       - REPOSITORY_URI=496746411336.dkr.ecr.eu-north-1.amazonaws.com/py-app
