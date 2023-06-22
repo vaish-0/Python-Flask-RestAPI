@@ -10,8 +10,8 @@ phases:
       - echo Logging in to Amazon ECR...
       - /root/.pyenv/versions/3.9.16/bin/python3.9 -m pip install --upgrade pip
       - aws --version
-      - aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 496746411336.dkr.ecr.eu-north-1.amazonaws.com
-      - REPOSITORY_URI=496746411336.dkr.ecr.eu-north-1.amazonaws.com/py-app
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 468085339621.dkr.ecr.ap-south-1.amazonaws.com
+      - REPOSITORY_URI=468085339621.dkr.ecr.ap-south-1.amazonaws.com/ecs-python
       - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
   build:
     commands:
@@ -25,6 +25,6 @@ phases:
       - echo Pushing the Docker images...
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name":"py-app","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"ecs-python","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json #this represent the name of container
 artifacts:
     files: imagedefinitions.json
