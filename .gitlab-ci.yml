@@ -1,21 +1,12 @@
-variables: 
-   MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
-
 stages:
    - build
    - Build Docker Image
    - Login & Push Docker Image
    - deploy on eks
-cache:
-  paths:
-    - .m2/repository  # cache-repo
-    - target
-
-
 build-job:
    stage: build
    tags: 
-      - cicd-runner  #gitlab-Runner Tag to run project on that specific tag
+      - test-runner  #gitlab-Runner Tag to run project on that specific tag
    script:
      - echo "python build started"
      - "pip install -r requirements.txt"
@@ -23,12 +14,14 @@ build-job:
 dockerimage-job:
    stage: Build Docker Image
    tags: 
-      - cicd-runner
+      - test-runner
    script:
      - echo "Building Docker image"
      - "docker info"
+     - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/k8r9n6o1
+     - docker build -t  .
      #- "docker build -t 468085339621.dkr.ecr.ap-south-1.amazonaws.com/gitlab-image-repo ."
-     - docker build -t farhanregistery/python-application .
+     #- docker build -t farhanregistery/python-application .
 
 dockerlogin and push -job:
    stage: Login & Push Docker Image
