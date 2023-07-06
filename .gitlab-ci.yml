@@ -18,20 +18,20 @@ dockerimage-job:
    script:
      - echo "Building Docker image"
      - "docker info"
-     - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 667684916769.dkr.ecr.us-west-2.amazonaws.com
-     - docker build -t 667684916769.dkr.ecr.us-west-2.amazonaws.com/python-app .
+     - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 391215170865.dkr.ecr.ap-south-1.amazonaws.com
+     - docker build -t 391215170865.dkr.ecr.ap-south-1.amazonaws.com/python-app .
 dockerlogin and push -job:
    stage: Login & Push Docker Image
    tags: 
       - test-runner
    before_script:
      - echo "login to ECR"
-     - "aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 667684916769.dkr.ecr.us-west-2.amazonaws.com"
+     - "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 391215170865.dkr.ecr.ap-south-1.amazonaws.com"
     # - docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWD"
     # - docker login registry.gitlab.com -u 00farhan00 -p $CICD_TOKEN
    script:
       - echo "docker push image"
-      - docker push 667684916769.dkr.ecr.us-west-2.amazonaws.com/python-app:latest
+      - docker push 391215170865.dkr.ecr.ap-south-1.amazonaws.com/python-app:latest
      # - docker push farhanregistery/python-application
      # - docker push registery.gitlab.com/00farhan00/maven-web-app
 
